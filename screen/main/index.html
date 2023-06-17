@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QRCode Generator</title>
+    <link rel="stylesheet" href="../../style/main.css" />
+    <link rel="stylesheet" href="../../style/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/fontawesome-free-6.2.1-web/css/all.css" />
+    <script src="../../lib/jquery.3.6.0.js"></script>
+    <script src="../../lib/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <section id="section01">
+        <div id="QrContainer" class="d-flex justify-content-start align-items-start">
+            <div class="main_wrapper">
+                <div id="header" class="d-flex justify-content-between align-items-center">
+                    <img id="qrCodeLogo" src="../../assets/icons/qr-code-logo.png">
+                    <h3>Generate your QR Codes</h1>
+                    <button id="toggleSidebar" data-flag="false">
+                        <svg width="25px" height="25px" fill="#2d278e" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512">
+                            <path
+                                d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="content_box_holder" class="d-flex justify-content-start">
+                    <div class="left_content_box selected">
+                        <button class="btnOption" id="Text" data-flag="true">
+                        <img id="testImg" src="../../assets/icons/text-hover-btn.png" />
+                    </button>
+                        <button class="btnOption" id="url" data-flag="false">
+                        <img id="urlImg" src="../../assets/icons/button2.png" />
+                    </button>
+                        <button class="btnOption" id="Phone" data-flag="false">
+                        <img id="phoneImg" src="../../assets/icons/button3.png" />
+                    </button>
+                        <button class="btnOption" id="Sms" data-flag="false">
+                        <img id="smsImg" src="../../assets/icons/button4.png" />
+                    </button>
+                        <button class="btnOption" id="Email" data-flag="false">
+                        <img id="emailImg" src="../../assets/icons/button5.png" />
+                    </button>
+                        <button class="btnOption" id="Wifi" data-flag="false">
+                        <img id="wifiImg" src="../../assets/icons/button6.png" />
+                    </button>
+                        <button class="btnOption" id="Whatsapp" data-flag="false">
+                        <img id="whatsappImg" src="../../assets/icons/button7.png" />
+                    </button>
+                    </div>
+                    <div class="middle_content_box">
+                        <div class="form" autocomplete="on">
+                            <div class="title">
+                                <h2>Enter Information</h2>
+                            </div>
+                            <div id="details">
+                                <div id="textBox" class="visible">
+                                    <label for="text">Enter Text:</label>
+                                    <input type="text" id="text" name="text" placeholder="Enter text" pattern="[A-Za-z]{3}" style="display:block" />
+                                </div>
+                                <div id="webBox" class="visible">
+                                    <label for="website">Enter Website:</label>
+                                    <input type="url" id="website" name="website" placeholder="https://google.com" style="display:block" />
+                                </div>
+                                <div id="phNoBox" class="visible">
+                                    <label for="phone"> Enter Phone Number:</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="Enter phone number" style="display:block " />
+                                </div>
+                                <div id="smsBox" class="visible">
+                                    <label for="sms">SMS:</label>
+                                    <textarea type="tel" id="sms" class="form-control" rows="3" name="sms" placeholder="Enter SMS here" style="display:block "></textarea>
+                                </div>
+                                <div id="emailBox" class="visible">
+                                    <label for="email">Email:</label>
+                                    <textarea type="email" class="form-control" id="email" name="email" style="display:block" rows="3"></textarea>
+                                </div>
+                                <div id="wifiBox" class="visible">
+                                    <label for="wifi">WiFi Network Name:</label>
+                                    <input type="text" id="wifi" name="wifi" placeholder="Enter Network Name or SSID" style="display:block " />
+                                    <div class="encryption-options ">
+                                        <label>
+                                        <input type="radio" name="encryption" value="none" />
+                                        None
+                                    </label>
+                                        <label>
+                                        <input type="radio" name="encryption" value="wep" /> WEP
+                                    </label>
+                                        <label>
+                                        <input type="radio" name="encryption" value="wpa" />
+                                        WPA
+                                    </label>
+                                    </div>
+                                </div>
+                                <div id="whatsappBox" class="visible">
+                                    <div>
+                                        <label for="whatsapp-number">Enter Whatsapp Number:</label>
+                                        <input type="whatsapp" name="whatsappmsg" id="whatsapp-number" placeholder="Enter Your whatsapp Number" style="display:block" />
+                                        <label for="whatsapp-message">Enter Whatsapp Message:</label>
+                                        <textarea class="form-control" id="whatsapp-message" rows="3" name="textmsg" placeholder="Enter whatsapp Message" onkeyup="checkInput('#Whatsapp')"></textarea>
+                                    </div>
+                                </div>
+                                <button type="button" id="midContentbutton" >Generate QR Code</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="last_content_box">
+                        <div class="title ">
+                            <h2>Generated QR Code</h2>
+                        </div>
+                        <div class="qrcode_body">
+                            <div id="qrcode_holder" data-tag="false">
+                                <img src="../../assets/icons/barcode.png" id="staticQrCode" />
+
+                            </div>
+                            <div class="btn_group">
+                                <button id="print" class="action_btn"><img src="../../assets/icons/print-icon.png" />Print
+                            </button>
+                                <button id="save" class="action_btn"><img src="../../assets/icons/save-icon.png" /> Save</button>
+                                <button id="download" class="action_btn"><img src="../../assets/icons/download-icon.png" />Download</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="qrCodeSidebar">
+                <div id="sidebarContent">
+                    <h2>Saved QR code</h2>
+                    <div id="search_bar">
+                        <form novalidate=" " class="search_box" onsubmit="event.preventDefault()">
+                            <input type="text" placeholder="Search here..." id="searchInput" name="searchInput" />
+                            <svg width="20px" height="20px" fill="#6f67de" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4
+                                        25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg>
+                        </form>
+                    </div>
+                    <div id="showQrcodeField"></div>
+                </div>
+            </div>
+        </div>
+        <!-- <div id="orgLogo" onclick="(function(){window.Bridge.openExternalURL(`https://teknikforce.com`)})()">
+            <img src="../../assets/icons/taknik-logo.png" alt=" " srcset=" " id="img" /> -->
+    </section>
+
+    <!-- Create task Modal -->
+    <div id="saveQRcodeModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title">Save QR code</h1>
+                </div>
+                <div class="modal-body">
+                    <form role="form" method="POST" action=" ">
+                        <input type="hidden" name="_token" value=" " />
+                        <div class="form-group ">
+                            <label class="control-label">Enter a Name:</label>
+                            <div>
+                                <input id="qrcodeNameInput" class="form-control input-lg" value=" " />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <button type="submit" id="saveQrcodeText" class="btn btn-success mt-5">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="version"></div>
+
+
+    <script src="../main/renderer.js"></script>
+</body>
+
+</html>
